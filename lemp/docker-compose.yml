@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+    php:
+        image: koolserve/php:latest
+        container_name: php
+        depends_on:
+            - nginx
+            - mysql
+        restart: always
+        ports:
+            - "9007:9000"
+        volumes:
+            - /docker/www:/var/www/html
+    nginx:
+        image: nginx:alpine
+        container_name: nginx
+        restart: always
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - /docker/nginx:/etc/nginx
+            - /docker/www:/var/www/html
+            - /docker/logs/nginx:/var/log/nginx
+    mysql:
+        image: percona:latest
+        container_name: mysql
+        restart: always
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+        ports:
+            - "3306:3306"
+        volumes:
+            - /docker/mysql:/var/lib/mysql
