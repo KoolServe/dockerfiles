@@ -16,7 +16,7 @@ RUN apk add --no-cache \
     libpng-dev \
     make \
     postfix
-RUN docker-php-ext-install -j 4 iconv mcrypt gd pdo_mysql
+RUN docker-php-ext-install -j "$(getconf _NPROCESSORS_ONLN)" iconv mcrypt gd pdo_mysql
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 
 #Xdebug
@@ -29,7 +29,7 @@ RUN echo "php_flag[display_errors] = Off">>/usr/local/etc/php-fpm.conf \
   && echo "php_admin_value[display_errors] = 'stderr'">>/usr/local/etc/php-fpm.conf \
   && ln -sf /dev/stdout /var/log/php5-fpm.log
 
-RUN docker-php-ext-install -j 4 \
+RUN docker-php-ext-install -j "$(getconf _NPROCESSORS_ONLN)" \
   bcmath \
   bz2 \
   calendar \
