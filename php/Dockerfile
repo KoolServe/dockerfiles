@@ -16,7 +16,8 @@ RUN apk add --no-cache \
     libpng-dev \
     make \
     postfix \
-    bzip2
+    bzip2-dev \
+    gawk
 RUN docker-php-ext-install -j "$(getconf _NPROCESSORS_ONLN)" iconv mcrypt gd pdo_mysql
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 
