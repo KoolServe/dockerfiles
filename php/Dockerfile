@@ -1,8 +1,12 @@
 FROM php:7.0-fpm-alpine
 RUN apk add --no-cache \
-    gmp-dev \
-    freetype-dev \
+    autoconf \
+    binutils \
     curl-dev \
+    freetype-dev \
+    g++ \
+    gcc \
+    gmp-dev \
     libcurl \
     libjpeg-turbo-dev \
     libmcrypt-dev \
@@ -15,7 +19,6 @@ RUN docker-php-ext-install -j "$(getconf _NPROCESSORS_ONLN)" \
     curl \
     exif \
     fileinfo \
-    gd \
     gmp \
     json \
     mbstring \
@@ -24,7 +27,8 @@ RUN docker-php-ext-install -j "$(getconf _NPROCESSORS_ONLN)" \
     posix \
     xml \
 
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j "$(getconf _NPROCESSORS_ONLN)" gd
 
 RUN curl -o redis.zip https://codeload.github.com/phpredis/phpredis/zip/b8f3ceebca63328b5fbd2bd3d9722b7600e476b7 \
     && unzip redis.zip \
