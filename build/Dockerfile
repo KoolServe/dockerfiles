@@ -11,21 +11,22 @@ RUN apt-get update \
 
 #Install PHP and git
 RUN apt-get install -y --allow-unauthenticated \
-  php7.0-cli \
-  php7.0-mysql \
-  php7.0-gd \
-  php7.0-json \
-  php7.0-zip \
-  php7.0-mbstring \
-  git
-
-RUN php -v
-
-RUN apt-get install -y --allow-unauthenticated \
+  php7.1-cli \
+  php7.1-mysql \
+  php7.1-gd \
+  php7.1-json \
+  php7.1-zip \
+  php7.1-mbstring \
+  php7.1-common \
+  git \
   nodejs \
   npm \
 
-  && ln -s /usr/bin/nodejs /usr/bin/node
+  && ln -s /usr/bin/nodejs /usr/bin/node \
+
+  && php -v \
+  && node -v \
+  && npm -v
 
 RUN npm -g install bower grunt-cli gulp yarn \
   && bower --version \
@@ -39,9 +40,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
   && mv composer.phar /usr/local/bin/composer \
   && composer --allow-root --version
 
-RUN mkdir /build /.config /.composer \
-  && chown 82:82 /build /.config /.composer
+RUN mkdir /build /.config /.composer /.npm /.yarn /.local \
+  && chown 82:82 /build /.config /.composer /.npm /.yarn /tmp /.local
 
-USER 82
+#USER 82
 
 WORKDIR /build

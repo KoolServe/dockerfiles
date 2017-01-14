@@ -1,2 +1,2 @@
 version='koolserve/build:devel'
-docker build -t $version .
+docker build --no-cache -t $version .
