@@ -16,6 +16,7 @@ services:
         links:
             - "mysql:mysql"
             - "redis:redis"
+            - "smtp:smtp"
         depends_on:
             - mysql
         volumes:
@@ -45,7 +46,10 @@ services:
         restart: always
         ports:
             - "3306:3306"
-        environment:
-            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
         volumes:
             - /docker/mysql:/var/lib/mysql
+    smtp:
+        image: namshi/smtp:latest
+        container_name: smtp
+        restart: always
+        hostname: mail-de1.koolserve.uk
