@@ -52,4 +52,4 @@ services:
         image: namshi/smtp:latest
         container_name: smtp
         restart: always
-        hostname: mail-de1.koolserve.uk
+        hostname: ${HOSTNAME}
