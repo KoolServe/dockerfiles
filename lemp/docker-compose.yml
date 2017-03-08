@@ -31,7 +31,8 @@ services:
             - "80:80"
             - "443:443"
         volumes:
-            - /docker/nginx:/etc/nginx
+            - /docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - /docker/nginx/sites-enabled:/etc/nginx/sites-enabled
             - /docker/www:/var/www/html
             - /docker/logs/nginx:/var/log/nginx
     redis:
@@ -46,6 +47,8 @@ services:
         restart: always
         ports:
             - "3306:3306"
+        environment:
+            - MYSQL_RANDOM_ROOT_PASSWORD='true'
         volumes:
             - /docker/mysql:/var/lib/mysql
     smtp:
