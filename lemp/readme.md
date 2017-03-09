@@ -24,6 +24,7 @@ docker-compose logs mysql | grep 'GENERATED ROOT PASSWORD:'
 
 Nginx will need a little bit of configuring before it will work. Copy the nginx.conf file in this repo to the Nginx volume and then restart Nginx with
 ```
+cp nginx.conf /docker/nginx/nginx.conf
 docker restart nginx
 ```
 or just run `update.sh`.
