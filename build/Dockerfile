@@ -14,6 +14,8 @@ RUN docker --version
 #Install PHP and git
 RUN apt-get install -y --allow-unauthenticated \
   php7.0-cli \
+  php7.0-curl \
+  php7.0-json \
   php7.0-mysql \
   php7.0-gd \
   php7.0-json \
