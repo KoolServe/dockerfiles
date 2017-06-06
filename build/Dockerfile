@@ -22,6 +22,7 @@ RUN apt-get install -y --allow-unauthenticated \
   php7.0-zip \
   php7.0-mbstring \
   php7.0-common \
+  php7.0-dom \
   git \
   nodejs \
   npm \
