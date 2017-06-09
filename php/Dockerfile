@@ -38,7 +38,7 @@ RUN curl -o redis.zip https://codeload.github.com/phpredis/phpredis/zip/b8f3ceeb
     && ./configure \
     && make -j "$(getconf _NPROCESSORS_ONLN)" \
     && make install \
-    && rm -rf redis.zip phpredis
+    && rm -rf redis.zip phpredis \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/docker-php-ext-redis.ini
 
 COPY php.ini /usr/local/etc/php/
